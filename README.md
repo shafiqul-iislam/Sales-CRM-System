@@ -39,8 +39,8 @@ Follow these steps to get the application running locally.
 
 ### 1. Clone & Install
 ```bash
-git clone <your-repo-url>
-cd sales-crm-system
+git clone https://github.com/shafiqul-iislam/Sales-CRM-System.git
+cd Sales-CRM-System
 composer install
 npm install
 ```
