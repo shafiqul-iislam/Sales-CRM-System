@@ -25,8 +25,6 @@ This is a comprehensive business application built with **Laravel** and **Tailwi
 
 * **Design Pattern:** The core sales logic is abstracted into a dedicated `SaleService`. This keeps the controllers thin and ensures that the complex transaction (creating the sale, generating sale items, deducting stock, updating KPIs, and firing emails) is completely atomic and reusable.
 * **Role-Based Portals:** The application features two completely separate, restricted portals for `admin` and `employee` roles, ensuring secure access to data.
-* **Bonus - Multi-Branch Support:** The optional Multi-Branch feature was purposefully skipped. As the prompt prioritized clean, maintainable architecture over feature completeness, shoehorning a complex multi-tenant inventory system into the current schema at the last minute would compromise code quality.
-
 ---
 
 ## ⚙️ Setup Instructions
