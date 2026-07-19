@@ -15,12 +15,23 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::when(request('search'), function ($query) {
-            $query->where('name', 'like', '%' . request('search') . '%')
-                ->orWhere('sku', 'like', '%' . request('search') . '%');
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . request('search') . '%')
+                  ->orWhere('sku', 'like', '%' . request('search') . '%');
+            });
         })
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
+        ->when(request('status'), function ($query) {
+            if (request('status') === 'in_stock') {
+                $query->where('stock_quantity', '>', 20);
+            } elseif (request('status') === 'low_stock') {
+                $query->whereBetween('stock_quantity', [1, 20]);
+            } elseif (request('status') === 'out_of_stock') {
+                $query->where('stock_quantity', '<=', 0);
+            }
+        })
+        ->latest()
+        ->paginate(10)
+        ->withQueryString();
 
         return view('admin.products.index', compact('products'));
     }

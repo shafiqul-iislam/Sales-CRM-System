@@ -18,13 +18,18 @@ class ProductRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'sku' => ['required', 'string', 'max:100', 'unique:products,sku,' . $this->route('product')],
+            'sku' => [
+                'required', 
+                'string', 
+                'max:100', 
+                \Illuminate\Validation\Rule::unique('products', 'sku')->ignore($this->route('product'))
+            ],
             'price' => ['required', 'numeric', 'min:0'],
             'stock_quantity' => ['required', 'integer', 'min:0'],
         ];

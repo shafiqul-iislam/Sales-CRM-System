@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
 
             [
                 'name' => 'John Smith',
-                'email' => 'john@example.com',
+                'email' => 'employee@example.com',
                 'phone' => '01710000001',
                 'role' => 'employee',
                 'kpi_score' => 5,

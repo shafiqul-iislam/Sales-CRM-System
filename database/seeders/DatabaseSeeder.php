@@ -15,12 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
 
         $this->call([
             UserSeeder::class,
@@ -28,5 +22,14 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             SaleSeeder::class,
         ]);
+
+        $admin = User::where('email', 'admin@example.com')->first();
+
+        $token = $admin->createToken('assessment')->plainTextToken;
+
+        echo PHP_EOL;
+        echo "===================================" . PHP_EOL;
+        echo "API Token: " . $token . PHP_EOL;
+        echo "===================================" . PHP_EOL;
     }
 }

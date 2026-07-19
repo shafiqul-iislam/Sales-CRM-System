@@ -12,6 +12,13 @@ class Sale extends Model
         'sale_date',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'sale_date' => 'datetime',
+        ];
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class);
